@@ -11,7 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools','pyserial'],
     zip_safe=True,
     maintainer='Trent Shumay',
     maintainer_email='trent@iotdesignshop.com',
@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'usb_serial = dexhand_usb_serial.usb_serial:main',
         ],
     },
 )

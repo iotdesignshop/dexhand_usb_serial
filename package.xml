@@ -5,15 +5,18 @@
   <version>0.0.1</version>
   <description>ROS 2 Package for Connecting to DexHand Firmware Serial Interface via USB </description>
   <maintainer email="trent@iotdesignshop.com">Trent Shumay</maintainer>
-  <license>CC BY-NC-SA 4.0<</license>
+  <license>CC BY-NC-SA 4.0</license>
 
   <depend>rclpy</depend>
+  <depend>std_msgs</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
+  <exec_depend>python3-serial</exec_depend>
+  
   <export>
     <build_type>ament_python</build_type>
   </export>
