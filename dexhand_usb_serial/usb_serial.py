@@ -11,14 +11,16 @@ class USBSerialNode(Node):
         self.declare_parameter("serial_port", "/dev/ttyACM0")
         serial_port = self.get_parameter("serial_port").get_parameter_value().string_value
         
-        self.publisher_ = self.create_publisher(String, '/dexhand_response', 10)
-        self.subscription = self.create_subscription(String, '/dexhand_command', self.listener_callback, 10)
+        self.publisher_ = self.create_publisher(String, 'dexhand_hw_response', 10)
+        self.subscription = self.create_subscription(String, 'dexhand_hw_command', self.listener_callback, 10)
+        
         self.serial_conn = serial.Serial(serial_port, 9600)
         self.timer = self.create_timer(0.1, self.read_from_serial)
 
     def listener_callback(self, msg):
-        self.get_logger().info('Sending to Arduino: "%s"' % msg.data)
-        self.serial_conn.write(msg.data.encode('utf-8'))
+        message = msg.data+'\n'
+        self.get_logger().info('Sending to Arduino: "%s"' % message)
+        self.serial_conn.write(message.encode('utf-8'))
 
     def read_from_serial(self):
         if self.serial_conn.in_waiting:
